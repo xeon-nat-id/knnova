@@ -23,7 +23,8 @@ class LoginScreen extends ValidationComponent {
 			pin: "",
 			emailError: '',
 			pinError: '',
-			loading: false
+			loading: false,
+			err:""
 		}
 	}
 
@@ -38,16 +39,31 @@ class LoginScreen extends ValidationComponent {
 	pinHandler = (pin) => {
 		this.setState({
 			pin: pin
+		});	
+	}
+
+
+	async handleSubmit()
+	{
+		try{
+		var res = await gqlClient.request('login', {
+			email: this.state.email,
+			password: this.state.pin
+		})
+		var token = res.data
+	}catch(e){
+		let errorMsg;
+		if (e.response && e.response.data && e.response.data.message) {
+			errorMsg = e.response.data.message;
+		} else {
+			errorMsg = e.message;
+		}
+		this.setState({
+			err: errorMsg,
 		});
 	}
-
-
-
-	handleSubmit = () => {
-		var res = gqlClient.post('login', {email: this.state.email, pin:this.state.pin})
-		var token = res.data
 	}
-	
+
 
 	render() {
 		if(!this.isFormValid()){
@@ -66,7 +82,7 @@ class LoginScreen extends ValidationComponent {
 							<View>
 								<Text style={styles.signupHeading} uppercase={true}>Welcome to Knovva</Text>
 								<Text style={errors ? styles.error : ""}>
-									{errors}
+									{this.state.err}
 									
 								</Text>
 							</View>
@@ -75,16 +91,17 @@ class LoginScreen extends ValidationComponent {
 									<Input style={styles.inputStyle} placeholder="Email" keyboardType="email-address" placeholderTextColor="#999" autoFocus onChangeText={this.emailHandler} value={this.state.email} />
 								</Item>
 								<Item style={[styles.itemMargin, this.state.pinError ? { borderColor: '#e1e1e1' } : null]}>
-									<Input style={styles.inputStyle} placeholder="Password" keyboardType="numeric" placeholderTextColor="#999" onChangeText={this.pinHandler} value={this.state.pin} secureTextEntry={true} maxLength={4} ref={pinRef => this.pinRef = pinRef} />
+									<Input style={styles.inputStyle} placeholder="Password" placeholderTextColor="#999" onChangeText={this.pinHandler} value={this.state.pin} secureTextEntry={true} ref={pinRef => this.pinRef = pinRef} />
 								</Item>
 							</View>	
 							<TouchableOpacity>
 								<View><Text style={styles.forgot}>Forgot Password?</Text></View>
 							</TouchableOpacity>
-							<Button light block style={styles.fill} onPress={this.handleSubmit}><Text style={styles.button} uppercase={true}> Login  </Text></Button>
+							<Button light block style={styles.fill} onPress={()=>this.handleSubmit()}><Text style={styles.button} uppercase={true}> Login  </Text></Button>
 						</View>
 						<View>
 							<TouchableOpacity onPress={() => this.props.navigation.navigate("Signup")} >
+
 								<Text style={styles.startnow}>Haven’t enrolled yet? Start Now!</Text>
 							</TouchableOpacity>
 						</View>
