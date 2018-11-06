@@ -242,5 +242,10 @@ export default {
     mediaLeft: {
         flexDirection: 'row',
         alignItems: 'center'
+    },
+    error:{
+        borderColor: '#FF2F2F',
+        backgroundColor: '#FF2F2F',
     }
+
 };

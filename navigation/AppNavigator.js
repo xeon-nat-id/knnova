@@ -11,11 +11,12 @@ import SignupScreen from '../screens/Userauthentication/SignupScreen';
 
 const LoginStack = createStackNavigator({
 	Login: LoginScreen,
-	Signup: SignupScreen
+	SignUp: SignupScreen
 }, {
 	initialRouteName: 'Login',
 });
 
 export default createSwitchNavigator({
 	Login: LoginStack
+	
 });
