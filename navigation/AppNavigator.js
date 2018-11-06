@@ -5,11 +5,13 @@ import {
 	createStackNavigator
 } from 'react-navigation';
 
-import WelcomeScreen from '../screens/Welcome/WelcomeScreen';
-import LoginScreen from '../screens/Login/LoginScreen';
+import HomeScreen from '../screens/Home/HomeScreen';
+import LoginScreen from '../screens/Userauthentication/LoginScreen';
+import SignupScreen from '../screens/Userauthentication/SignupScreen';
 
 const LoginStack = createStackNavigator({
-	Login: LoginScreen
+	Login: LoginScreen,
+	Signup: SignupScreen
 }, {
 	initialRouteName: 'Login',
 });

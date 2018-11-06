@@ -3,8 +3,8 @@ import { Image, View, ScrollView, StatusBar, TouchableOpacity, ImageBackground, 
 import { Container, Button, H3, Text, Header, Title, Body, Left, Right, Content, Item, Input, Icon, List, ListItem, Thumbnail, Drawer, ActionSheet } from "native-base";
 import Swiper from 'react-native-swiper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import Spinner from 'react-native-loading-spinner-overlay'; 
-import styles from "./styles";
+import Spinner from 'react-native-loading-spinner-overlay';
+import styles from "./Homecss";
 import { ImagePicker, Camera, Permissions } from 'expo';
 // import Modal from "react-native-simple-modal";
 import { Dropdown } from 'react-native-material-dropdown';
@@ -113,7 +113,7 @@ class SideBar extends Component {
 		if (this.state.cameraDisplay == false) {
 			return (
 				<Content style={{ backgroundColor: '#555' }}>
-					
+
 
 					<View style={styles.logosidebar}>
 						<Image style={styles.logosideImg} source={require("../../assets/images/white-logo.png")} />
@@ -156,7 +156,7 @@ class SideBar extends Component {
 		} else {
 			return (
 				<View style={{ flex: 1 }}>
-					
+
 				</View>
 			);
 		}
@@ -182,7 +182,7 @@ class HomeScreen extends Component {
 	}
 
 	componentDidMount() {
-		
+
 		// /** get user details */
 		// Expo.SecureStore.getItemAsync("PlaytronUserDetails").then((res2) => {
 		// 	let value = JSON.parse(res2);
@@ -218,7 +218,7 @@ class HomeScreen extends Component {
 		// });
 	}
 
-	
+
 
 
 	openDrawer() {
@@ -236,7 +236,7 @@ class HomeScreen extends Component {
 
 		// <View style={styles.switchdropdown}>
 		// 	<Text style={styles.switchheading}>SWITCH DJ</Text>
-			
+
 		// </View>
 	}
 
@@ -258,7 +258,7 @@ class HomeScreen extends Component {
 								<Image style={styles.hearderlogoImg} source={require("../../assets/images/logo-head.png")} />
 							</View>
 							<View></View>
-						</View>	
+						</View>
 						<ScrollView>
 						<View style={styles.cardArea}>
 								<Image source={require("../../assets/images/img-1.jpg")} />

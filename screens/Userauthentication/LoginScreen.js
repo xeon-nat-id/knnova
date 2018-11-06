@@ -5,7 +5,7 @@ import Swiper from 'react-native-swiper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import ValidationComponent from 'react-native-form-validator';
 import Spinner from 'react-native-loading-spinner-overlay';
-import styles from "./styles";
+import styles from "./Logincss";
 
 // import {
 //     customerLogin
