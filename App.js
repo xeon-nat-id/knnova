@@ -41,12 +41,10 @@ export default class App extends React.Component {
         require('./assets/images/robot-prod.png'),*/
       ]),
       Font.loadAsync({
-        'AvenirLTStd-Book': require('./assets/fonts/AvenirLTStd-Book.otf'),
-        'AvenirLTStd-Heavy': require('./assets/fonts/AvenirLTStd-Heavy.otf'),
-        'AvenirLTStd-Light': require('./assets/fonts/AvenirLTStd-Light.otf'),
-        'Gotham-book': require('./assets/fonts/ufonts.com_gotham-book.ttf'),
-        'Gotham-medium': require('./assets/fonts/GothamMedium.ttf'),
-        'HelveticaNeue': require('./assets/fonts/HelveticaNeue-Light.otf'),
+        'Montserrat-Thin': require('./assets/fonts/Montserrat-Thin.ttf'),
+        'Montserrat-Regular': require('./assets/fonts/Montserrat-Regular.ttf'),
+        'Montserrat-Semibold': require('./assets/fonts/Montserrat-SemiBold.ttf'),
+        'Montserrat-Medium': require('./assets/fonts/Montserrat-Medium.ttf'),
         'Roboto': require("native-base/Fonts/Roboto.ttf"),
         'Roboto_medium': require("native-base/Fonts/Roboto_medium.ttf"),
         'Ionicons': require("native-base/Fonts/Ionicons.ttf"),

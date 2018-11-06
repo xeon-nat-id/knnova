@@ -6,13 +6,14 @@ import {
 } from 'react-navigation';
 
 import WelcomeScreen from '../screens/Welcome/WelcomeScreen';
+import LoginScreen from '../screens/Login/LoginScreen';
 
-const WelcomeStack = createStackNavigator({
-	Welcome: WelcomeScreen
+const LoginStack = createStackNavigator({
+	Login: LoginScreen
 }, {
-	initialRouteName: 'Welcome',
+	initialRouteName: 'Login',
 });
 
 export default createSwitchNavigator({
-	Welcome: WelcomeStack
+	Login: LoginStack
 });
