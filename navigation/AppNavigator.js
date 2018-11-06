@@ -9,11 +9,13 @@ import WelcomeScreen from '../screens/Welcome/WelcomeScreen';
 import LoginScreen from '../screens/Login/LoginScreen';
 
 const LoginStack = createStackNavigator({
-	Login: LoginScreen
+	Login: LoginScreen,
+	Welcome: WelcomeScreen
 }, {
 	initialRouteName: 'Login',
 });
 
 export default createSwitchNavigator({
 	Login: LoginStack
+	
 });

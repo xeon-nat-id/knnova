@@ -11,7 +11,7 @@ import styles from "./styles";
 //     customerLogin
 // } from "../../js/api/commonApi";
 
-class LoginScreen extends Component {
+class LoginScreen extends ValidationComponent {
 	static navigationOptions = {
 		header: null,
 	};
@@ -30,7 +30,8 @@ class LoginScreen extends Component {
 	emailHandler = (email) => {
 		this.setState({
 			email: email
-		});
+		});	
+		this.validate({email:{ email: true, required: true }})
 	}
 
 	/** pin handler */
@@ -40,64 +41,12 @@ class LoginScreen extends Component {
 		});
 	}
 
-	/** customer login */
-	customerLogin() {
-		// this.validate({
-		//     email: { email: true, required: true },
-		//     pin: { numeric: true, minlength: 3 }
-		// });
-
-		// if (this.isFormValid()) {
-		//     const email = this.state.email.trim();
-		//     const pin = this.state.pin.trim();
-
-		//     const data = {
-		//         email: email,
-		//         pin: pin
-		//     };
-
-		//     this.setState({
-		//         loading: true
-		//     });
-
-		//     customerLogin(data).then((res) => {
-		//         this.setState({
-		//             loading: false
-		//         });
-		//         if (res.data.Ack == 1) {
-
-		//             Expo.SecureStore.setItemAsync("PlaytronUserDetails", JSON.stringify(res.data.response)).then((res) => {
-		//                 this.props.navigation.navigate("Home");
-		//             });
-		//         } else if (res.data.Ack == 0) {
-		//             ToastAndroid.showWithGravity(
-		//                 "Please provide the correct credentials.",
-		//                 ToastAndroid.SHORT,
-		//                 ToastAndroid.TOP
-		//             );
-		//         }
-		//     }).catch((error) => {
-		//         this.setState({
-		//             loading: false
-		//         });
-		//         ToastAndroid.showWithGravity(
-		//             'User login failed.',
-		//             ToastAndroidast.SHORT,
-		//             ToastAndroid.TOP
-		//         );
-		//     });
-		// } else {
-		//     let emailError = this.isFieldInError('email');
-		//     let pinError = this.isFieldInError('pin');
-
-		//     this.setState({
-		//         emailError: emailError,
-		//         pinError: pinError
-		//     });
-		// }
-	}
+	
 
 	render() {
+		if(!this.isFormValid()){
+			var errors = this.getErrorMessages()
+		}
 		return (
 			<View style={{ width: '100%', borderWidth: 1, flex: 1 }}>
 				<StatusBar backgroundColor={'transparent'} translucent />
@@ -108,13 +57,18 @@ class LoginScreen extends Component {
 							<View style={styles.logoarea}>
 								<Image style={[styles.logoimg]} source={require("../../assets/images/logo.png")} />
 							</View>
-							<View><Text style={styles.signupHeading} uppercase={true}>Welcome to Knovva</Text></View>
+							<View>
+								<Text style={styles.signupHeading} uppercase={true}>Welcome to Knovva</Text>
+								<Text style={errors ? styles.error : ""}>
+									{errors}
+								</Text>
+							</View>
 							<View style={{ width: '100%' }}>
 								<Item style={[styles.itemMargin, this.state.emailError ? { borderColor: '#e1e1e1' } : null]}>
-									<Input style={styles.inputStyle} placeholder="Email" keyboardType="email-address" placeholderTextColor="#999" autoFocus onChangeText={this.emailHandler} value={this.state.email} onSubmitEditing={() => this.pinRef._root.focus()} />
+									<Input style={styles.inputStyle} placeholder="Email" keyboardType="email-address" placeholderTextColor="#999" autoFocus onChangeText={this.emailHandler} value={this.state.email} />
 								</Item>
 								<Item style={[styles.itemMargin, this.state.pinError ? { borderColor: '#e1e1e1' } : null]}>
-									<Input style={styles.inputStyle} placeholder="Password" keyboardType="numeric" placeholderTextColor="#999" onChangeText={this.pinHandler} value={this.state.pin} secureTextEntry={true} maxLength={4} ref={pinRef => this.pinRef = pinRef} onSubmitEditing={this.customerLogin.bind(this)} />
+									<Input style={styles.inputStyle} placeholder="Password" keyboardType="numeric" placeholderTextColor="#999" onChangeText={this.pinHandler} value={this.state.pin} secureTextEntry={true} maxLength={4} ref={pinRef => this.pinRef = pinRef} />
 								</Item>
 							</View>
 							<TouchableOpacity>
