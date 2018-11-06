@@ -6,6 +6,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import ValidationComponent from 'react-native-form-validator';
 import Spinner from 'react-native-loading-spinner-overlay';
 import styles from "./Logincss";
+import gqlClient from './../../apis/graphQLClient'
 
 // import {
 //     customerLogin
@@ -31,7 +32,6 @@ class LoginScreen extends ValidationComponent {
 		this.setState({
 			email: email
 		});	
-		this.validate({email:{ email: true, required: true }})
 	}
 
 	/** pin handler */
@@ -41,6 +41,12 @@ class LoginScreen extends ValidationComponent {
 		});
 	}
 
+
+
+	handleSubmit = () => {
+		var res = gqlClient.post('login', {email: this.state.email, pin:this.state.pin})
+		var token = res.data
+	}
 	
 
 	render() {
@@ -61,6 +67,7 @@ class LoginScreen extends ValidationComponent {
 								<Text style={styles.signupHeading} uppercase={true}>Welcome to Knovva</Text>
 								<Text style={errors ? styles.error : ""}>
 									{errors}
+									
 								</Text>
 							</View>
 							<View style={{ width: '100%' }}>
@@ -70,11 +77,11 @@ class LoginScreen extends ValidationComponent {
 								<Item style={[styles.itemMargin, this.state.pinError ? { borderColor: '#e1e1e1' } : null]}>
 									<Input style={styles.inputStyle} placeholder="Password" keyboardType="numeric" placeholderTextColor="#999" onChangeText={this.pinHandler} value={this.state.pin} secureTextEntry={true} maxLength={4} ref={pinRef => this.pinRef = pinRef} />
 								</Item>
-							</View>
+							</View>	
 							<TouchableOpacity>
 								<View><Text style={styles.forgot}>Forgot Password?</Text></View>
 							</TouchableOpacity>
-							<Button light block style={styles.fill} onPress={() => this.props.navigation.navigate("Home")}><Text style={styles.button} uppercase={true}> Login  </Text></Button>
+							<Button light block style={styles.fill} onPress={this.handleSubmit}><Text style={styles.button} uppercase={true}> Login  </Text></Button>
 						</View>
 						<View>
 							<TouchableOpacity onPress={() => this.props.navigation.navigate("Signup")} >
